@@ -33,6 +33,17 @@ class Lesson(models.Model):
         return '{}{}'.format(SHORTWEEKDAY[self.weekday] if self.weekday is not None else '--',
                              self.period if self.period is not None else '-')
 
+    def toJson(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'shortname': self.shortname,
+            'select': self.select,
+            'weekday': self.weekday,
+            'period': self.period,
+            'teacher': self.teacher,
+        }
+
 
 class Schedule(models.Model):
     '''授業予定'''
@@ -62,6 +73,21 @@ class Schedule(models.Model):
         return '{}-{}'.format(self.period, self.period + self.length - 1) if self.length > 1 else str(self.period)
 
     period_length.short_description = '時限'
+
+    def toJson(self):
+        result = {
+            'date': self.date,
+            'period': self.period,
+            'length': self.length,
+            'teacher': self.teacher,
+        }
+        if self.lesson:
+            result['lesson'] = self.lesson_id
+        for name in ('exercises', 'test', 'task', 'title', 'memo'):
+            value = getattr(self, name)
+            if value:
+                result[name] = value
+        return result
 
 
 class Task(models.Model):
