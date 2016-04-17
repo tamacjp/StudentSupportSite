@@ -1,6 +1,7 @@
 .DS_Store
 .htpassword
 .idea/
+.sass-cache/
 *.pyc
 htdocs/
 logs/
@@ -9,3 +10,4 @@ vhost.conf
 project/db/
 project/omcn6/settings/local.py
 project/*/migrations/*.py
+project/html/css/*.css.map

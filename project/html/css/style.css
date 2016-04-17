@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.exercises {
+  display: inline;
+  margin-left: 10px;
+  font-size: x-small;
+  padding: 2px;
+  background-color: yellow;
+  color: blue;
+}
+
+.exercises:after {
+  content: '演習';
+}
+
+.test {
+  display: inline;
+  margin-left: 10px;
+  font-size: x-small;
+  padding: 2px;
+  background-color: red;
+  color: white;
+}
+
+.task {
+  display: inline;
+  margin-left: 10px;
+  font-size: x-small;
+  padding: 2px;
+  background-color: blue;
+  color: white;
+}
+
+.schedule-list .date {
+  background-color: aquamarine;
+}
+.schedule-list .schedule.select {
+  color: gray;
+}
+.schedule-list .period {
+  display: inline;
+  margin-right: 10px;
+}
+.schedule-list .period:after {
+  content: '限';
+}
+.schedule-list .name {
+  display: inline;
+}
+
+.lesson .select:after {
+  display: inline;
+  margin-left: 10px;
+  font-size: x-small;
+  padding: 2px;
+  background-color: lightgray;
+  color: black;
+  margin-left: 10px;
+  content: '選択';
+}
+.lesson .lesson-list {
+  border-collapse: collapse;
+}
+.lesson .lesson-list td {
+  padding: 3px 5px;
+}
+.lesson .lesson-list .row:nth-child(odd) {
+  background-color: lightcyan;
+}
+.lesson .lesson-list .date {
+  text-align: right;
+}
+.lesson .lesson-list .period:after {
+  content: '限';
+}
+.lesson .lesson-list .memo {
+  font-size: small;
+}
+
+/*# sourceMappingURL=style.css.map */

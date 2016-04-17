@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+body {
+  //font-size: 10pt;
+}
+
+@mixin schedule-option {
+  display: inline;
+  margin-left: 10px;
+  font-size: x-small;
+  padding: 2px;
+}
+
+.exercises {
+  @include schedule-option;
+  background-color: yellow;
+  color: blue;
+}
+
+.exercises:after {
+  content: '演習';
+}
+
+.test {
+  @include schedule-option;
+  background-color: red;
+  color: white;
+}
+
+.task {
+  @include schedule-option;
+  background-color: blue;
+  color: white;
+}
+
+.schedule-list {
+  .date {
+    background-color: aquamarine;
+  }
+  .schedule {
+  }
+  .schedule.select {
+    color: gray;
+  }
+  .period {
+    display: inline;
+    margin-right: 10px;
+  }
+  .period:after {
+    content: '限';
+  }
+  .name {
+    display: inline;
+  }
+}
+
+.lesson {
+  .select:after {
+    @include schedule-option;
+    background-color: lightgray;
+    color: black;
+    margin-left: 10px;
+    content: '選択';
+  }
+
+  .lesson-list {
+    border-collapse: collapse;
+    td {
+      padding: 3px 5px;
+    }
+    .row:nth-child(odd) {
+      background-color: lightcyan;
+    }
+    .row:nth-child(even) {
+      //background-color: lightgoldenrodyellow;
+    }
+    .date {
+      text-align: right;
+    }
+    .period:after {
+      content: '限';
+    }
+    .memo {
+      font-size: small;
+    }
+  }
+}
