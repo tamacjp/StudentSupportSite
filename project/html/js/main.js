@@ -4,7 +4,7 @@ var holidays;
 
 $(function () {
   $.ajax({
-    url: '/schedule/api/alldata?' + new Date().getTime(),
+    url: 'api/alldata?' + new Date().getTime(),
     success: function (data) {
       lessons = {};
       for (var index in data.lesson) {
