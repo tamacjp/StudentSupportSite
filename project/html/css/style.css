@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body {
+  margin: 3px;
+}
+
 .exercises {
   display: inline;
   margin-left: 10px;
@@ -45,6 +49,53 @@
 }
 .schedule-list .name {
   display: inline;
+}
+
+.calendar .week {
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+}
+.calendar .day {
+  width: 19.5%;
+  margin: 1px;
+}
+.calendar .day .date {
+  background-color: aquamarine;
+  font-size: small;
+  text-align: center;
+  height: 20px;
+}
+.calendar .day .period {
+  border: 1px solid lightgray;
+  margin-top: -1px;
+}
+.calendar .day .period .title {
+  display: inline;
+  float: left;
+}
+.calendar .day .period .exercises, .calendar .day .period .test, .calendar .day .period .task {
+  float: right;
+  margin: 0px;
+}
+.calendar .day .period.select {
+  color: gray;
+}
+.calendar .day .length1 {
+  height: 23px;
+}
+.calendar .day .length2 {
+  height: 47px;
+}
+.calendar .day .length3 {
+  height: 71px;
+}
+.calendar .day .length4 {
+  height: 95px;
+}
+.calendar .day .length5 {
+  height: 119px;
 }
 
 .lesson .select:after {

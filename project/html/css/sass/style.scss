@@ -2,6 +2,7 @@
 
 body {
   //font-size: 10pt;
+  margin: 3px;
 }
 
 @mixin schedule-option {
@@ -51,6 +52,47 @@ body {
   }
   .name {
     display: inline;
+  }
+}
+
+.calendar {
+  .week {
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+  }
+  .day {
+    width: 19.5%;
+    margin: 1px;
+
+    .date {
+      background-color: aquamarine;
+      font-size: small;
+      text-align: center;
+      height: 20px;
+    }
+    .period {
+      border: 1px solid lightgray;
+      margin-top: -1px;
+
+      .title {
+        display: inline;
+        float: left;
+      }
+      .exercises, .test, .task {
+        float: right;
+        margin: 0px;
+      }
+    }
+    .period.select {
+      color: gray;
+    }
+    @for $i from 1 through 5 {
+      .length#{$i} {
+        height: #{24 * $i - 1}px;
+      }
+    }
   }
 }
 

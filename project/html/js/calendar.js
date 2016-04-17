@@ -1,89 +1,71 @@
-var formatdate = function (date, delim) {
-  if (!delim) {
-    delim = '-';
-  }
-  return date.getFullYear() + delim + ('00' + (date.getMonth() + 1)).slice(-2) + delim + ('00' + date.getDate()).slice(-2);
-};
-
-var shortdate = function (date) {
-  return (date.getMonth() + 1) + '月' + date.getDate() + '日(' + '日月火水木金土'[date.getDay()] + ')';
-};
-
-var formatperiod = function (data) {
-  return (data.length > 1) ? (data.period + '-' + (data.period + data.length - 1)) : data.period;
-};
-
-var makelist = function () {
-  var $list = $('<div>').addClass('schedule-list');
-
-  var today;
-  for (var index in schedules) {
-    (function (data) {
-      var lesson = lessons[data.lesson];
-
-      // 日付表示
-      if (today != data.date) {
-        var date = new Date(data.date);
-        if (today && new Date(today).getDay() > date.getDay()) {
-          // 週の変わり目
-          $list.append($('<hr>'));
-        }
-        today = data.date;
-        $list.append($('<div>').addClass('date').prop('id', today).text(shortdate(date)));
-      }
-
-      // 1コマの予定
-      var $row = $('<div>').addClass('schedule');
-      $row.append($('<div>').addClass('period').text(formatperiod(data)));
-      $row.append($('<div>').addClass('name').text(lesson.name).on('click', function () {
-        location.hash = 'lesson=' + lesson.id;
-      }));
-      if (lesson.select) {
-        $row.addClass('select');
-      }
-      if (data.exercises) {
-        $row.append($('<div>').addClass('exercises'));
-      }
-      if (data.test) {
-        $row.append($('<div>').addClass('test').text(data.test));
-      }
-      if (data.task) {
-        $row.append($('<div>').addClass('task').text(data.task));
-      }
-      $list.append($row);
-    })(schedules[index]);
-  }
-
-  return $list;
-};
-
 var makecalendar = function () {
 
-  var $calendar = $('<div>');
+  var $calendar = $('<div>').addClass('calendar');
 
-  // 初期化
-  (function (start, end) {
-    var $row = $('<div>').addClass('calendar-week');
+  var date = new Date(schedules[0].date);
+  date.setDate(date.getDate() - date.getDay());
+  var enddate = new Date(schedules[schedules.length - 1].date);
+  enddate.setDate(enddate.getDate() + 7 - enddate.getDay());
 
-    var date = new Date(start);
-    end = new Date(end);
-    while (date <= end) {
-      switch (date.getDay()) {
-        case 0: // 日曜日
-          $row = $('<div>').addClass('calendar-week');
-          $calendar.append($row);
-          break;
-        case 6: // 土曜日
-          break;
-        default:
-          $row.append($('<div>').addClass('calendar-day').text(date.getDate()));
-          break;
-      }
-      date.setDate(date.getDate() + 1);
+  var $row;
+  var scheduleindex = 0;
+  while (date <= enddate) {
+    switch (date.getDay()) {
+      case 0: // 日曜日
+        $row = $('<div>').addClass('week');
+        $calendar.append($row);
+        break;
+      case 6: // 土曜日
+        break;
+      default:
+        $row.append((function ($day, date) {
+          // 日付
+          var title = shortdate(date);
+          if (date.getDay() > 1) {
+            title = title.replace(/.+月/, '');
+          }
+          $day.append($('<div>').addClass('date').text(title));
+
+          // 授業
+          for (var period = 1, length; period <= 5; period += length) {
+            (function () {
+              var $period = $('<div>').addClass('period').html('&nbsp;');
+              length = 1;
+              var data = schedules[scheduleindex];
+              if (data && data.date == formatdate(date) && data.period == period) {
+                // この授業を表示
+                var lesson = lessons[data.lesson];
+                $period.append($('<div>').addClass('title').text(lesson.shortname));
+                $period.on('click', function () {
+                  location.hash = 'lesson=' + data.lesson;
+                });
+                if (lesson.select) {
+                  $period.addClass('select');
+                }
+                if (data.exercises) {
+                  $period.append($('<div>').addClass('exercises'));
+                }
+                if (data.test) {
+                  $period.append($('<div>').addClass('test').text('試'/*data.test*/));
+                }
+                if (data.task) {
+                  $period.append($('<div>').addClass('task').text('提'/*data.task*/));
+                }
+                length = data.length;
+                scheduleindex++;
+              }
+              $period.addClass('length' + length);
+              $day.append($period);
+            })();
+          }
+          return $day;
+        })($('<div>').addClass('day'), date));
+        break;
     }
+    date.setDate(date.getDate() + 1);
+  }
 
-    $(document.body).append($calendar);
-  })('2016-4-1', '2016-8-10');
+  $(document.body).append($calendar);
 
   return $calendar;
 };
