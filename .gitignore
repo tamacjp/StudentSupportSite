@@ -1,0 +1,11 @@
+.DS_Store
+.htpassword
+.idea/
+*.pyc
+htdocs/
+logs/
+venv/
+vhost.conf
+project/db/
+project/omcn6/settings/local.py
+project/*/migrations/*.py
