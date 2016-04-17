@@ -16,10 +16,10 @@ var makelesson = function (id) {
   for (var index in schedules) {
     (function (data) {
       if (data.lesson == id) {
-        var $row = $('<tr>').addClass('row').on('click', function () {
+        var $row = $('<tr>').addClass('row');
+        $row.append($('<td>').addClass('date').text(shortdate(new Date(data.date))).on('click', function () {
           location.hash = 'list=' + data.date;
-        });
-        $row.append($('<td>').addClass('date').text(shortdate(new Date(data.date))));
+        }));
         $row.append($('<td>').addClass('period').text(formatperiod(data)));
         $row.append($('<td>').addClass('teacher').text(data.teacher));
         var $option = $('<td>').addClass('option');
@@ -32,8 +32,12 @@ var makelesson = function (id) {
         if (data.task) {
           $option.append($('<div>').addClass('task').text(data.task));
         }
+        if (data.memo) {
+          $option.append($('<div>').addClass('memo').text('メモ').on('click', function () {
+            alert(data.memo);
+          }));
+        }
         $row.append($option);
-        $row.append($('<td>').addClass('memo').text(data.memo ? ('※' + data.memo) : ''));
         $table.append($row);
       }
     })(schedules[index]);

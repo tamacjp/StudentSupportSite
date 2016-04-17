@@ -20,11 +20,14 @@ var makecalendar = function () {
       default:
         $row.append((function ($day, date) {
           // 日付
+          var today = formatdate(date);
           var title = shortdate(date);
           if (date.getDay() > 1) {
             title = title.replace(/.+月/, '');
           }
-          $day.append($('<div>').addClass('date').text(title));
+          $day.append($('<div>').addClass('date').text(title).on('click', function () {
+            location.hash = 'list=' + today;
+          }));
 
           // 授業
           for (var period = 1, length; period <= 5; period += length) {
@@ -59,7 +62,7 @@ var makecalendar = function () {
             })();
           }
           return $day;
-        })($('<div>').addClass('day'), date));
+        })($('<div>').addClass('day').prop('id', formatdate(date)), date));
         break;
     }
     date.setDate(date.getDate() + 1);

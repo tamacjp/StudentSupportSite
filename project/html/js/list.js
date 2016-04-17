@@ -23,13 +23,17 @@ var makelist = function () {
 
       // 日付表示
       if (today != data.date) {
-        var date = new Date(data.date);
-        if (today && new Date(today).getDay() > date.getDay()) {
-          // 週の変わり目
-          $list.append($('<hr>'));
-        }
-        today = data.date;
-        $list.append($('<div>').addClass('date').prop('id', today).text(shortdate(date)));
+        (function () {
+          var date = new Date(data.date);
+          if (today && new Date(today).getDay() > date.getDay()) {
+            // 週の変わり目
+            $list.append($('<hr>'));
+          }
+          today = data.date;
+          $list.append($('<div>').addClass('date').prop('id', today).text(shortdate(date)).on('click', function () {
+            location.hash = 'calendar=' + formatdate(date);
+          }));
+        })();
       }
 
       // 1コマの予定

@@ -27,31 +27,20 @@ $(function () {
             case 'list':
               // リスト表示
               if (currentmode != mode) {
-                $(document.body).empty().append(makelist());
+                $('#content').empty().append(makelist());
               }
-              // 日付存在チェック
-              var target = option ? new Date(option) : new Date();
-              for (var index in schedules) {
-                var date = new Date(schedules[index].date);
-                if (date >= target) {
-                  option = formatdate(date);
-                  break;
-                }
-              }
-              var $target = $('#' + option);
-              if ($target.length > 0) {
-                window.scrollTo(0, $target.offset().top);
-              }
+              option = scrolldate(option);
               break;
 
             case 'calendar':
               // リスト表示
-              $(document.body).empty().append(makecalendar());
+              $('#content').empty().append(makecalendar());
+              option = scrolldate(option);
               break;
 
             case 'lesson':
               // 授業表示
-              $(document.body).empty().append(makelesson(option));
+              $('#content').empty().append(makelesson(option));
               break;
           }
 
@@ -62,4 +51,21 @@ $(function () {
       }, 100);
     },
   });
+
+  var scrolldate = function (option) {
+    // 日付存在チェック
+    var target = option ? new Date(option) : new Date();
+    for (var index in schedules) {
+      var date = new Date(schedules[index].date);
+      if (date >= target) {
+        option = formatdate(date);
+        break;
+      }
+    }
+    var $target = $('#' + option);
+    if ($target.length > 0) {
+      window.scrollTo(0, $target.offset().top - parseInt($('#content').css('padding-top')));
+    }
+    return option;
+  };
 });

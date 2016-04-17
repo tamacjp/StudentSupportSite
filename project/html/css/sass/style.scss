@@ -5,6 +5,19 @@ body {
   margin: 3px;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  background-color: lightgoldenrodyellow;
+  height: 30px;
+  width: 100%;
+}
+
+#content {
+  padding-top: 30px;
+}
+
 @mixin schedule-option {
   display: inline;
   margin-left: 10px;
@@ -37,6 +50,7 @@ body {
 .schedule-list {
   .date {
     background-color: aquamarine;
+    font-size: small;
   }
   .schedule {
   }
@@ -97,6 +111,9 @@ body {
 }
 
 .lesson {
+  .title {
+    font-size: large;
+  }
   .select:after {
     @include schedule-option;
     background-color: lightgray;
@@ -123,7 +140,8 @@ body {
       content: '限';
     }
     .memo {
-      font-size: small;
+      @include schedule-option;
+      background-color: goldenrod;
     }
   }
 }

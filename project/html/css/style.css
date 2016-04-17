@@ -3,6 +3,19 @@ body {
   margin: 3px;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  background-color: lightgoldenrodyellow;
+  height: 30px;
+  width: 100%;
+}
+
+#content {
+  padding-top: 30px;
+}
+
 .exercises {
   display: inline;
   margin-left: 10px;
@@ -36,6 +49,7 @@ body {
 
 .schedule-list .date {
   background-color: aquamarine;
+  font-size: small;
 }
 .schedule-list .schedule.select {
   color: gray;
@@ -98,6 +112,9 @@ body {
   height: 119px;
 }
 
+.lesson .title {
+  font-size: large;
+}
 .lesson .select:after {
   display: inline;
   margin-left: 10px;
@@ -124,7 +141,11 @@ body {
   content: '限';
 }
 .lesson .lesson-list .memo {
-  font-size: small;
+  display: inline;
+  margin-left: 10px;
+  font-size: x-small;
+  padding: 2px;
+  background-color: goldenrod;
 }
 
 /*# sourceMappingURL=style.css.map */
