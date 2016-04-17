@@ -30,18 +30,15 @@ var makelist = function () {
             $list.append($('<hr>'));
           }
           today = data.date;
-          $list.append($('<div>').addClass('date').prop('id', today).text(shortdate(date)).on('click', function () {
-            location.hash = 'calendar=' + formatdate(date);
-          }));
+          $list.append($('<div>').addClass('date').prop('id', today)
+            .append($('<a>').text(shortdate(date)).attr('href', '#calendar=' + formatdate(date))));
         })();
       }
 
       // 1コマの予定
       var $row = $('<div>').addClass('schedule');
       $row.append($('<div>').addClass('period').text(formatperiod(data)));
-      $row.append($('<div>').addClass('name').text(lesson.name).on('click', function () {
-        location.hash = 'lesson=' + lesson.id;
-      }));
+      $row.append($('<a>').addClass('name').text(lesson.name).attr('href', '#lesson=' + lesson.id));
       if (lesson.select) {
         $row.addClass('select');
       }

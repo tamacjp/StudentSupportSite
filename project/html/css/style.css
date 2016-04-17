@@ -3,6 +3,11 @@ body {
   margin: 3px;
 }
 
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -10,6 +15,9 @@ body {
   background-color: lightgoldenrodyellow;
   height: 30px;
   width: 100%;
+}
+.header a {
+  margin-left: 10px;
 }
 
 #content {
@@ -97,19 +105,19 @@ body {
   color: gray;
 }
 .calendar .day .length1 {
-  height: 23px;
+  height: 24px;
 }
 .calendar .day .length2 {
-  height: 47px;
+  height: 49px;
 }
 .calendar .day .length3 {
-  height: 71px;
+  height: 74px;
 }
 .calendar .day .length4 {
-  height: 95px;
+  height: 99px;
 }
 .calendar .day .length5 {
-  height: 119px;
+  height: 124px;
 }
 
 .lesson .title {

@@ -25,23 +25,20 @@ var makecalendar = function () {
           if (date.getDay() > 1) {
             title = title.replace(/.+月/, '');
           }
-          $day.append($('<div>').addClass('date').text(title).on('click', function () {
-            location.hash = 'list=' + today;
-          }));
+          $day.append($('<div>').addClass('date')
+            .append($('<a>').text(title).attr('href', '#list=' + today)));
 
           // 授業
           for (var period = 1, length; period <= 5; period += length) {
             (function () {
-              var $period = $('<div>').addClass('period').html('&nbsp;');
+              var $period = $('<div>').addClass('period');
               length = 1;
               var data = schedules[scheduleindex];
               if (data && data.date == formatdate(date) && data.period == period) {
                 // この授業を表示
                 var lesson = lessons[data.lesson];
-                $period.append($('<div>').addClass('title').text(lesson.shortname));
-                $period.on('click', function () {
-                  location.hash = 'lesson=' + data.lesson;
-                });
+                $period.append($('<div>').addClass('title')
+                  .append($('<a>').text(lesson.shortname).attr('href', '#lesson=' + data.lesson)));
                 if (lesson.select) {
                   $period.addClass('select');
                 }

@@ -5,6 +5,11 @@ body {
   margin: 3px;
 }
 
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -12,6 +17,10 @@ body {
   background-color: lightgoldenrodyellow;
   height: 30px;
   width: 100%;
+
+  a {
+    margin-left: 10px;
+  }
 }
 
 #content {
@@ -104,7 +113,7 @@ body {
     }
     @for $i from 1 through 5 {
       .length#{$i} {
-        height: #{24 * $i - 1}px;
+        height: #{25 * $i - 1}px;
       }
     }
   }

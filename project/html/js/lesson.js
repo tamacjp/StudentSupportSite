@@ -17,9 +17,7 @@ var makelesson = function (id) {
     (function (data) {
       if (data.lesson == id) {
         var $row = $('<tr>').addClass('row');
-        $row.append($('<td>').addClass('date').text(shortdate(new Date(data.date))).on('click', function () {
-          location.hash = 'list=' + data.date;
-        }));
+        $row.append($('<td>').addClass('date').append($('<a>').text(shortdate(new Date(data.date))).attr('href', '#list=' + data.date)));
         $row.append($('<td>').addClass('period').text(formatperiod(data)));
         $row.append($('<td>').addClass('teacher').text(data.teacher));
         var $option = $('<td>').addClass('option');
