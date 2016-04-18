@@ -123,6 +123,19 @@ a {
 .calendar .day .length5 {
   height: 124px;
 }
+.calendar .day .tasklimit {
+  font-size: x-small;
+}
+.calendar .day .tasklimit .limit {
+  display: inline;
+  color: blue;
+  margin-right: 2px;
+}
+.calendar .day .tasklimit .title {
+  background-color: blue;
+  color: white;
+  padding: 1px;
+}
 
 .task-list .date {
   background-color: aquamarine;
@@ -156,10 +169,6 @@ a {
 }
 .lesson .lesson-list .period:after {
   content: '限';
-}
-.lesson .lesson-list .limit {
-  font-size: small;
-  color: blue;
 }
 .lesson .lesson-list .memo {
   display: inline;

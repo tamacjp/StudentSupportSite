@@ -9,6 +9,8 @@ var makecalendar = function () {
 
   var $row;
   var scheduleindex = 0;
+  var taskindex = 0;
+  var task = tasks && tasks[taskindex++];
   while (date <= enddate) {
     switch (date.getDay()) {
       case 0: // 日曜日
@@ -34,7 +36,7 @@ var makecalendar = function () {
               var $period = $('<div>').addClass('period');
               length = 1;
               var data = schedules[scheduleindex];
-              if (data && data.date == formatdate(date) && data.period == period) {
+              if (data && data.date == today && data.period == period) {
                 // この授業を表示
                 var lesson = lessons[data.lesson];
                 $period.append($('<div>').addClass('title')
@@ -57,6 +59,19 @@ var makecalendar = function () {
               $period.addClass('length' + length);
               $day.append($period);
             })();
+          }
+
+          // タスク
+          while (task && formatdate(task.limit) <= today) {
+            var lesson = lessons[task.lesson];
+            var $task = $('<div>').addClass('tasklimit');
+            $task.append($('<div>').addClass('limit').text(formattime(task.limit)));
+            $task.append($('<a>').addClass('title').text(lesson.shortname).attr('href', '#lesson=' + task.lesson));
+            if (lesson.select) {
+              $task.addClass('select');
+            }
+            $day.append($task);
+            task = tasks[taskindex++];
           }
           return $day;
         })($('<div>').addClass('day').prop('id', formatdate(date)), date));

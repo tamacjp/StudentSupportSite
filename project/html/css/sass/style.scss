@@ -120,6 +120,20 @@ a {
         height: #{25 * $i - 1}px;
       }
     }
+
+    .tasklimit {
+      font-size: x-small;
+      .limit {
+        display: inline;
+        color: blue;
+        margin-right: 2px;
+      }
+      .title {
+        background-color: blue;
+        color: white;
+        padding: 1px;
+      }
+    }
   }
 }
 
@@ -159,10 +173,7 @@ a {
     .period:after {
       content: '限';
     }
-    .limit {
-      font-size: small;
-      color: blue;
-    }
+
     .memo {
       @include schedule-option;
       background-color: goldenrod;
