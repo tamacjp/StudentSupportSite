@@ -7,10 +7,9 @@ $(function () {
     url: 'api/alldata?' + new Date().getTime(),
     success: function (data) {
       lessons = {};
-      for (var index in data.lesson) {
-        var obj = data.lesson[index];
+      $.each(data.lesson, function (index, obj) {
         lessons[obj.id] = obj;
-      }
+      });
       schedules = data.schedule;
       holidays = [];
 
@@ -19,33 +18,40 @@ $(function () {
       var currentmode;
       setInterval(function () {
         if (currenthash != location.hash) {
-          var params = location.hash.slice(1).split('=');
-          var mode = params[0] || 'list';
+          currenthash = location.hash;
+          var params = currenthash.slice(1).split('=');
+          var mode = params[0] || 'calendar';
           var option = params[1];
 
+          var $content = $('#content');
           switch (mode) {
+            case 'calendar':
+              // カレンダー表示
+              if (currentmode != mode) {
+                $content.empty().append(makecalendar());
+              }
+              scrolldate(option);
+              break;
+
             case 'list':
               // リスト表示
               if (currentmode != mode) {
-                $('#content').empty().append(makelist());
+                $content.empty().append(makelist());
               }
-              option = scrolldate(option);
+              scrolldate(option);
               break;
 
-            case 'calendar':
-              // リスト表示
-              $('#content').empty().append(makecalendar());
-              option = scrolldate(option);
+            case 'task':
+              // タスク
+              $content.empty().append(maketask());
+              scrolldate(option);
               break;
 
             case 'lesson':
               // 授業表示
-              $('#content').empty().append(makelesson(option));
+              $content.empty().append(makelesson(option));
               break;
           }
-
-          // hash修正
-          currenthash = location.hash = '#' + [mode, option].join('=');
           currentmode = mode;
         }
       }, 100);
@@ -54,18 +60,18 @@ $(function () {
 
   var scrolldate = function (option) {
     // 日付存在チェック
-    var target = option ? new Date(option) : new Date();
-    for (var index in schedules) {
-      var date = new Date(schedules[index].date);
+    var target = option || formatdate(new Date());
+    $.each(schedules, function (index, obj) {
+      var date = obj.date;
       if (date >= target) {
-        option = formatdate(date);
-        break;
+        target = date;
+        return false;
       }
-    }
-    var $target = $('#' + option);
+    });
+    console.log(target);
+    var $target = $('#' + target);
     if ($target.length > 0) {
       window.scrollTo(0, $target.offset().top - parseInt($('#content').css('padding-top')));
     }
-    return option;
   };
 });
