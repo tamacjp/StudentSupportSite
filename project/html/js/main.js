@@ -1,5 +1,6 @@
 var lessons;
 var schedules;
+var tasks;
 var holidays;
 
 $(function () {
@@ -11,6 +12,7 @@ $(function () {
         lessons[obj.id] = obj;
       });
       schedules = data.schedule;
+      tasks = data.task;
       holidays = [];
 
       // hashチェック
@@ -75,3 +77,22 @@ $(function () {
     }
   };
 });
+
+var formatdate = function (date, delim) {
+  if (!delim) {
+    delim = '-';
+  }
+  return date.getFullYear() + delim + ('00' + (date.getMonth() + 1)).slice(-2) + delim + ('00' + date.getDate()).slice(-2);
+};
+
+var formattime = function (date) {
+  return date.getHours() + ':' + ('00' + date.getMinutes()).slice(-2);
+};
+
+var shortdate = function (date) {
+  return (date.getMonth() + 1) + '月' + date.getDate() + '日(' + '日月火水木金土'[date.getDay()] + ')';
+};
+
+var formatperiod = function (data) {
+  return (data.length > 1) ? (data.period + '-' + (data.period + data.length - 1)) : data.period;
+};
