@@ -66,12 +66,16 @@ a {
   .schedule.select {
     color: gray;
   }
-  .period {
+  .period, .limit {
     display: inline;
     margin-right: 10px;
   }
   .period:after {
     content: '限';
+  }
+  .limit {
+    font-size: small;
+    color: blue;
   }
   .name {
     display: inline;

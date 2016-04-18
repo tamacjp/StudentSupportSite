@@ -79,6 +79,9 @@ $(function () {
 });
 
 var formatdate = function (date, delim) {
+  if (typeof date == 'string') {
+    date = new Date(date);
+  }
   if (!delim) {
     delim = '-';
   }
@@ -86,10 +89,16 @@ var formatdate = function (date, delim) {
 };
 
 var formattime = function (date) {
+  if (typeof date == 'string') {
+    date = new Date(date);
+  }
   return date.getHours() + ':' + ('00' + date.getMinutes()).slice(-2);
 };
 
 var shortdate = function (date) {
+  if (typeof date == 'string') {
+    date = new Date(date);
+  }
   return (date.getMonth() + 1) + '月' + date.getDate() + '日(' + '日月火水木金土'[date.getDay()] + ')';
 };
 

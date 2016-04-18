@@ -2,22 +2,36 @@ var makelist = function () {
   var $list = $('<div>').addClass('schedule-list');
 
   var today;
-  $.each(schedules, function (index, data) {
-    var lesson = lessons[data.lesson];
-
-    // 日付表示
-    if (today != data.date) {
-      var date = new Date(data.date);
-      if (today && new Date(today).getDay() > date.getDay()) {
+  var makedate = function (date) {
+    return $('<div>').addClass('date').prop('id', date)
+      .append($('<a>').text(shortdate(date)).attr('href', '#calendar=' + date));
+  };
+  var adddate = function (date) {
+    date = formatdate(date);
+    if (today != date) {
+      if (today && new Date(today).getDay() > new Date(date).getDay()) {
         // 週の変わり目
         $list.append($('<hr>'));
       }
-      $list.append($('<div>').addClass('date').prop('id', data.date)
-        .append($('<a>').text(shortdate(date)).attr('href', '#calendar=' + data.date)));
-      today = data.date;
+      $list.append(makedate(date));
+      today = date;
     }
+  };
 
-    // 1コマの予定
+  var maketask = function (task) {
+    var lesson = lessons[task.lesson];
+    var $row = $('<div>').addClass('schedule');
+    $row.append($('<div>').addClass('limit').text(formattime(task.limit)));
+    $row.append($('<a>').addClass('name').text(lesson.name).attr('href', '#lesson=' + lesson.id));
+    $row.append($('<div>').addClass('task').text(task.task));
+    return $row;
+  };
+  var addtask = function (task) {
+    $list.append(maketask(task));
+  };
+
+  var makeperiod = function (data) {
+    var lesson = lessons[data.lesson];
     var $row = $('<div>').addClass('schedule');
     $row.append($('<div>').addClass('period').text(formatperiod(data)));
     $row.append($('<a>').addClass('name').text(lesson.name).attr('href', '#lesson=' + lesson.id));
@@ -33,8 +47,34 @@ var makelist = function () {
     if (data.task) {
       $row.append($('<div>').addClass('task').text(data.task));
     }
-    $list.append($row);
+    return $row;
+  };
+  var addperiod = function (data) {
+    $list.append(makeperiod(data));
+  };
+
+  var taskindex = 0;
+  var task = tasks && tasks[taskindex++];
+  $.each(schedules, function (index, data) {
+    while (task && task.limit < data.date) {
+      adddate(task.limit);
+      addtask(task);
+      task = tasks[taskindex++];
+    }
+
+    // 日付表示
+    adddate(data.date);
+
+    // 1コマの予定
+    addperiod(data);
   });
+
+  // 残ったタスクどうしよう（とりあえず表示）
+  while (task) {
+    adddate(task.limit);
+    addtask(task);
+    task = tasks[taskindex++];
+  }
 
   return $list;
 };

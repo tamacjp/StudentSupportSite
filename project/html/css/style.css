@@ -62,12 +62,16 @@ a {
 .schedule-list .schedule.select {
   color: gray;
 }
-.schedule-list .period {
+.schedule-list .period, .schedule-list .limit {
   display: inline;
   margin-right: 10px;
 }
 .schedule-list .period:after {
   content: '限';
+}
+.schedule-list .limit {
+  font-size: small;
+  color: blue;
 }
 .schedule-list .name {
   display: inline;
