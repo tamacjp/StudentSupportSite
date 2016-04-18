@@ -157,6 +157,10 @@ a {
 .lesson .lesson-list .period:after {
   content: '限';
 }
+.lesson .lesson-list .limit {
+  font-size: small;
+  color: blue;
+}
 .lesson .lesson-list .memo {
   display: inline;
   margin-left: 10px;

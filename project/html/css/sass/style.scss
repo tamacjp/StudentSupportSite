@@ -159,6 +159,10 @@ a {
     .period:after {
       content: '限';
     }
+    .limit {
+      font-size: small;
+      color: blue;
+    }
     .memo {
       @include schedule-option;
       background-color: goldenrod;
