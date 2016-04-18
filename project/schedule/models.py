@@ -98,3 +98,16 @@ class Task(models.Model):
     teacher = models.CharField('担当教員', max_length=200, null=True, blank=True)
     place = models.CharField('提出場所', max_length=100, null=True, blank=True)
     memo = models.TextField('メモ詳細', null=True, blank=True)
+
+    def toJson(self):
+        result = {
+            'limit': self.limit,
+            'task': self.task,
+        }
+        if self.lesson:
+            result['lesson'] = self.lesson_id
+        for name in ('teacher', 'place', 'memo'):
+            value = getattr(self, name)
+            if value:
+                result[name] = value
+        return result

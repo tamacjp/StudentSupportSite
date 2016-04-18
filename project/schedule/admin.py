@@ -7,6 +7,7 @@ from .models import Lesson, Schedule, Task
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['schedule', 'name', 'teacher']
     list_display_links = ['schedule', 'name']
+    ordering = ['weekday', 'period']
 
 
 class ScheduleAdmin(admin.ModelAdmin):
@@ -27,7 +28,11 @@ class ScheduleAdmin(admin.ModelAdmin):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['limit', 'lesson', 'task']
+    list_display_links = ['task']
+    list_filter = ['lesson']
+    date_hierarchy = 'limit'
+    ordering = ['limit']
 
 
 admin.site.register(Lesson, LessonAdmin)
