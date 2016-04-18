@@ -23,12 +23,16 @@ var makecalendar = function () {
         $row.append((function ($day, date) {
           // 日付
           var today = formatdate(date);
-          var title = shortdate(date);
-          if (date.getDay() > 1) {
-            title = title.replace(/.+月/, '');
+          if (holidays[today]) {
+            $day.append($('<div>').addClass('date holiday').text(holidays[today]));
+          } else {
+            var title = shortdate(date);
+            if (date.getDay() > 1) {
+              title = title.replace(/.+月/, '');
+            }
+            $day.append($('<div>').addClass('date')
+              .append($('<a>').text(title).attr('href', '#list=' + today)));
           }
-          $day.append($('<div>').addClass('date')
-            .append($('<a>').text(title).attr('href', '#list=' + today)));
 
           // 授業
           for (var period = 1, length; period <= 5; period += length) {

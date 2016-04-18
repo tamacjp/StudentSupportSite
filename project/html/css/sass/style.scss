@@ -98,6 +98,9 @@ a {
       font-size: small;
       text-align: center;
       height: 20px;
+      &.holiday {
+        background-color: lightpink;
+      }
     }
     .period {
       border: 1px solid lightgray;
@@ -117,7 +120,7 @@ a {
     }
     @for $i from 1 through 5 {
       .length#{$i} {
-        height: #{25 * $i - 1}px;
+        height: #{26 * $i - 1}px;
       }
     }
 

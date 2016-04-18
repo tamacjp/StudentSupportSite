@@ -93,6 +93,9 @@ a {
   text-align: center;
   height: 20px;
 }
+.calendar .day .date.holiday {
+  background-color: lightpink;
+}
 .calendar .day .period {
   border: 1px solid lightgray;
   margin-top: -1px;
@@ -109,19 +112,19 @@ a {
   color: gray;
 }
 .calendar .day .length1 {
-  height: 24px;
+  height: 25px;
 }
 .calendar .day .length2 {
-  height: 49px;
+  height: 51px;
 }
 .calendar .day .length3 {
-  height: 74px;
+  height: 77px;
 }
 .calendar .day .length4 {
-  height: 99px;
+  height: 103px;
 }
 .calendar .day .length5 {
-  height: 124px;
+  height: 129px;
 }
 .calendar .day .tasklimit {
   font-size: x-small;

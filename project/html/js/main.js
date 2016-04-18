@@ -1,7 +1,14 @@
 var lessons;
 var schedules;
 var tasks;
-var holidays;
+var holidays = {
+  '2016-04-29': '昭和の日',
+  '2016-05-03': '憲法記念日',
+  '2016-05-04': 'みどりの日',
+  '2016-05-05': 'こどもの日',
+  '2016-06-01': '創立記念日',
+  '2016-07-18': '海の日',
+};
 
 $(function () {
   $.ajax({
@@ -13,7 +20,7 @@ $(function () {
       });
       schedules = data.schedule;
       tasks = data.task;
-      holidays = [];
+      //holidays = data.holiday;
 
       // hashチェック
       var currenthash;
