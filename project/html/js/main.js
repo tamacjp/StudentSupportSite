@@ -52,7 +52,7 @@ $(function () {
 
             case 'task':
               // タスク
-              $content.empty().append(maketask());
+              $content.empty().append(makelist(true));
               scrolldate(option);
               break;
 
@@ -77,7 +77,6 @@ $(function () {
         return false;
       }
     });
-    console.log(target);
     var $target = $('#' + target);
     if ($target.length > 0) {
       window.scrollTo(0, $target.offset().top - parseInt($('#content').css('padding-top')));
