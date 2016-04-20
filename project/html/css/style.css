@@ -19,6 +19,10 @@ a {
 .header a {
   margin-left: 10px;
 }
+.header #reload {
+  float: right;
+  margin-right: 10px;
+}
 
 #content {
   padding-top: 30px;
