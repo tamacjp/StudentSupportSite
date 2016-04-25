@@ -55,7 +55,7 @@ var makecalendar = function () {
                   $period.append($('<div>').addClass('test').text('試'/*data.test*/));
                 }
                 if (data.task) {
-                  $period.append($('<div>').addClass('task').text('提'/*data.task*/));
+                  $period.append($('<div>').addClass('task').text('課'/*data.task*/));
                 }
                 length = data.length;
                 scheduleindex++;
